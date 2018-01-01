@@ -8,8 +8,10 @@ const bodyParser    = require  ('body-parser');
 const mongoose      = require  ('mongoose')
 const cors          = require('cors');
 
-const index = require  ('./routes/index');
-const users = require  ('./routes/users');
+const index     = require  ('./routes/index');
+const users     = require  ('./routes/users');
+const posts     = require  ('./routes/posts');
+const comments  = require  ('./routes/comments');
 
 const app = express();
 app.use(cors())
@@ -20,7 +22,6 @@ const dbName = 'jepretgram';
 const atlasdbURL  = `mongodb://wahibhacktiv8:${process.env.DB_PASSWORD}@wahib-hacktiv8-shard-00-00-uyl7c.mongodb.net:27017,wahib-hacktiv8-shard-00-01-uyl7c.mongodb.net:27017,wahib-hacktiv8-shard-00-02-uyl7c.mongodb.net:27017/${dbName}?ssl=true&replicaSet=wahib-hacktiv8-shard-0&authSource=admin`;
 mongoose.connect(atlasdbURL,{ useMongoClient: true });
 mongoose.Promise = global.Promise;
-
 
 
 // uncomment after placing your favicon in /public
@@ -34,6 +35,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routers 
 app.use('/', index);
 app.use('/users', users);
+app.use('/posts', posts);
+app.use('/comments', comments);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
