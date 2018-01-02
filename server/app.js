@@ -1,17 +1,16 @@
 require('dotenv').config()
 const express       = require  ('express');
 const path          = require  ('path');
-const favicon       = require  ('serve-favicon');
 const logger        = require  ('morgan');
 const cookieParser  = require  ('cookie-parser');
 const bodyParser    = require  ('body-parser');
 const mongoose      = require  ('mongoose')
 const cors          = require('cors');
 
-const index     = require  ('./routes/index');
-const users     = require  ('./routes/users');
-const posts     = require  ('./routes/posts');
-const comments  = require  ('./routes/comments');
+const index         = require  ('./routes/index');
+const users         = require  ('./routes/users');
+const posts         = require  ('./routes/posts');
+const userComments  = require  ('./routes/userComments');
 
 const app = express();
 app.use(cors())
@@ -23,9 +22,6 @@ const atlasdbURL  = `mongodb://wahibhacktiv8:${process.env.DB_PASSWORD}@wahib-ha
 mongoose.connect(atlasdbURL,{ useMongoClient: true });
 mongoose.Promise = global.Promise;
 
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/posts', posts);
-app.use('/comments', comments);
+app.use('/usercomments', userComments);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

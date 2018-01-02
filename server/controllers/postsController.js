@@ -1,7 +1,7 @@
 'use strict'
 const Post    = require('../models/post');
-const UserComment = require('../models/userComment')
-const User    = require('../models/user')
+const UserComment = require('../models/userComment');
+const User    = require('../models/user');
 
 class PostsController {
   
