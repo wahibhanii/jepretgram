@@ -1,8 +1,7 @@
-const express = require ('express');
-const router  = express.Router();
-const UsersController = require('../controllers/usersController')
-const authentication = require('../middleware/authentication')
-/* GET users listing. */
+const express         = require ('express');
+const router          = express.Router();
+const UsersController = require('../controllers/usersController');
+const authentication  = require('../middleware/authentication');
 
 //Create user
 router.post('/', UsersController.createUser);

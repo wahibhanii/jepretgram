@@ -1,3 +1,4 @@
+'use strict'
 const User = require('../models/user');
 const bcrypt      = require('bcryptjs');
 const salt        = bcrypt.genSaltSync(10);
@@ -150,13 +151,13 @@ class UserController {
         // follow
         console.log('following . . .' )
         userData.following.push(targetUserId)
-        User.findOneAndUpdate({_id: originUserId},userData)
+        User.update({_id: originUserId},userData)
         .then(result=> {
           return User.findOne({_id: targetUserId})
         })
         .then(targetUser => {
           targetUser.followers.push(originUserId)
-          return User.findOneAndUpdate({_id: targetUserId}, targetUser)
+          return User.update({_id: targetUserId}, targetUser)
         })
         .then(targetResult => {
           res.status(200).json({
@@ -172,13 +173,13 @@ class UserController {
         // unfollow
         console.log('unfollowing . . .')
         userData.following.splice(userData.following.indexOf(targetUserId),1)
-        User.findOneAndUpdate({_id: originUserId},userData)
+        User.update({_id: originUserId},userData)
         .then(result=> {
           return User.findOne({_id: targetUserId})
         })
         .then(targetUser => {
           targetUser.followers.splice(targetUser.followers.indexOf(originUserId),1)
-          return User.findOneAndUpdate({_id: targetUserId}, targetUser)
+          return User.update({_id: targetUserId}, targetUser)
         })
         .then(targetResult => {
           res.status(200).json({
