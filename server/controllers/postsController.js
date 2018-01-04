@@ -2,6 +2,7 @@
 const Post    = require('../models/post');
 const UserComment = require('../models/userComment');
 const User    = require('../models/user');
+const mongoose = require('mongoose');
 
 class PostsController {
   
@@ -28,17 +29,67 @@ class PostsController {
     })
   }
 
+  static getAllPosts(req, res) {
+    console.log('get all posts ===============================================')
+    Post.find({})
+    .populate(
+      {
+        path: 'comments',
+        model: 'UserComment',
+        populate: {
+          path: 'owner',
+          model: 'User'
+        }
+      }
+    )
+    .populate('owner')
+    .populate('likers')
+    .sort({createdAt: 'desc'})
+    .exec()
+    .then(result => {
+      console.log(result)
+      res.send(result)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err)
+    })
+  }
+
   static getTimeline(req, res) {
+    console.log('get timeline')
     User.findOne({_id: req.headers.decoded._id})
     .then(userData => {
       console.log(userData.following, 'this is following ----------------')
       let followingUser = userData.following;
       followingUser.push(userData._id);
       console.log(followingUser)
-      return Post.find({owner: {$in: followingUser}}).sort({createdAt: 'desc'}).exec()
+      let users= followingUser.map(userId => {return mongoose.Types.ObjectId(userId)})
+      console.log(users)
+      return Post.find({
+        owner : { $in: 
+          users
+        }
+      })
+      .populate(
+        {
+          path: 'comments',
+          model: 'UserComment',
+          populate: {
+            path: 'owner',
+            model: 'User'
+          }
+        }
+      )
+      .populate('owner')
+      .populate('likers')
+      .sort({createdAt: 'desc'})
+      .exec()
     })
     .then(result => {
-      res.send(result)
+      console.log(result)
+      console.log('done-=-=-=-==-=-')
+      res.status(200).send(result)
     })
     .catch(err => {
       console.log(err);
@@ -74,7 +125,8 @@ class PostsController {
   }
 
   static deletePost (req, res) {
-    User.deleteOne({_id: req.params.id})
+    console.log(req.params.id, 'deleting----------------------')
+    Post.deleteOne({_id: req.params.id})
     .then(result => {
       res.status(200).json({
         message : 'Delete post successful!',
@@ -102,12 +154,12 @@ class PostsController {
   }
 
   static likeUnlike(req, res) {
-    let userId = req.headers.decoded._id
+    let userId = mongoose.Types.ObjectId(req.headers.decoded._id)
     let postId = req.params.id
     console.log(userId)
     Post.findOne({_id: postId})
     .then(postData => {
-      if (postData.owner === userId){
+      if (postData.owner.toString()==userId.toString()){
         res.status(202).json({
           message: 'User\'s are unable to like their own posts!',
           data : postData

@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
   caption     : String,
   urlToImage  : String,
-  owner       : String,
+  owner       : {type: Schema.Types.ObjectId, ref: 'User'},
   likers      : [{type: Schema.Types.ObjectId, ref: 'User'}],
-  comments    : [{type: Schema.Types.ObjectId, ref: 'Comment'}],
+  comments    : [{type: Schema.Types.ObjectId, ref: 'UserComment'}],
   createdAt   : Date
 });
 
