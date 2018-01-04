@@ -36,6 +36,9 @@ export default {
     this.$store.commit('setInitialPage');
     this.redirection();
     this.$store.commit('getTimeline')
+    this.$store.commit('getAllPosts');
+    this.$store.commit('getAllUsers');
+    this.$store.commit('getMyProfile');
     // console.log(this.$store.state.currentPage)
     // console.log(this.$router.currentRoute)
     // this.$router.replace({path: this.$store.state.currentPage});

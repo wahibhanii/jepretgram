@@ -1,8 +1,10 @@
 <template>
   <v-app>
+  <top-nav></top-nav>
   <div class="view">
-    <top-nav></top-nav>
-    <router-view ></router-view>
+    <div class="scrollable">
+      <router-view ></router-view>
+    </div>
   </div>
     <bottom-nav></bottom-nav>
   </v-app>
@@ -27,7 +29,16 @@
 
 <style>
 .view{
-  margin-top: 60px;
-  margin-bottom : 56px
+  padding-top: 48px;
+  padding-bottom : 56px;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
+.scrollable{
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
 }
 </style>

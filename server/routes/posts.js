@@ -8,6 +8,9 @@ const gcs             = require('../middleware/gcs')
 // Create Post
 router.post('/',authentication, multer.single('file'), gcs, PostsController.createPost);
 
+// Get All Posts
+router.get('/', authentication, PostsController.getAllPosts);
+
 // Get Timeline
 router.get('/timeline', authentication, PostsController.getTimeline);
 

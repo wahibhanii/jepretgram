@@ -1,28 +1,32 @@
 <template>
   <v-app>
-  <div class="view">
+    <v-layout  class="scrollable"row justify-center v-for="post in allPosts" :key="post._id" mb-1>
+        <post :post="post"></post>
+      </v-layout>
   </v-app>
 </template>
 
 <script>
-  import BottomNav from './BottomNav'
-  import TopNav from './TopNav'
+  import Post from './Post'
+import {mapGetters} from 'vuex'
   export default {
     data () {
       return {
       }
     },
     components: {
+      Post
     },
+    computed: 
+      mapGetters([
+        'allPosts'
+      ])
+    ,
     created () {
-      this.$router.replace('/timeline')
+      // this.$store.commit('getTimeline')
     }
   }
 </script>
 
-<style>
-.view{
-  margin-top: 60px;
-  margin-bottom : 56px
-}
-</style>
+
+

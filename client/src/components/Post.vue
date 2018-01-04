@@ -77,6 +77,7 @@ import jwt from 'jsonwebtoken'
         .then(response =>{
           console.log(response);
           this.$store.commit('getTimeline');
+          this.$store.commit('getAllPosts');
           this.newComment = null;
         })
         .catch(err => console.log(`Fail: ${err}`))
@@ -117,6 +118,7 @@ import jwt from 'jsonwebtoken'
         .then(response =>{
           console.log(response);
           this.$store.commit('getTimeline')
+          this.$store.commit('getAllPosts');
           alert('Caption Updated!')
         })
         .catch(err => console.log(`Fail: ${err}`))
@@ -133,6 +135,7 @@ import jwt from 'jsonwebtoken'
         .then(response =>{
           console.log(response);
           this.$store.commit('getTimeline')
+          this.$store.commit('getAllPosts');
         })
         .catch(err => console.log(`Fail: ${err}`))
       }

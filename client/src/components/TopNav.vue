@@ -12,7 +12,7 @@
         <v-spacer></v-spacer>
         <v-toolbar-title class="title" > <v-icon color="pink">camera</v-icon>Jepretgram</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-menu left class="pr-3">
+        <v-menu left class="pr-4">
           <v-btn flat icon slot="activator" color="pink" light>
             <v-icon>more_vert</v-icon>
           </v-btn>

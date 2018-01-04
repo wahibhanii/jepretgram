@@ -48,6 +48,52 @@ const mutations = {
       console.log(err)
     })
   },
+
+  getAllPosts () {
+    console.log('getting all posts')
+    axios({
+      method: 'get',
+      url: `${baseURL}/posts`,
+      headers: {token: localStorage.token}
+    })
+    .then(response => {
+      this.state.allPosts = response.data
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+
+  getAllUsers () {
+    console.log('getting all Users')
+    axios({
+      method: 'get',
+      url: `${baseURL}/users`,
+      headers: {token: localStorage.token}
+    })
+    .then(response => {
+      this.state.allUsers = response.data.data
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+
+  getMyProfile () {
+    console.log('getting my profile')
+    let userId = jwt.decode(localStorage.token)._id
+    axios({
+      method: 'get',
+      url: `${baseURL}/users/${userId}`,
+      headers: {token: localStorage.token}
+    })
+    .then(response => {
+      this.state.myProfile = response.data.data
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
 }
 
 export default mutations

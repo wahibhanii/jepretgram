@@ -29,6 +29,33 @@ class PostsController {
     })
   }
 
+  static getAllPosts(req, res) {
+    console.log('get all posts ===============================================')
+    Post.find({})
+    .populate(
+      {
+        path: 'comments',
+        model: 'UserComment',
+        populate: {
+          path: 'owner',
+          model: 'User'
+        }
+      }
+    )
+    .populate('owner')
+    .populate('likers')
+    .sort({createdAt: 'desc'})
+    .exec()
+    .then(result => {
+      console.log(result)
+      res.send(result)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err)
+    })
+  }
+
   static getTimeline(req, res) {
     console.log('get timeline')
     User.findOne({_id: req.headers.decoded._id})
@@ -61,7 +88,8 @@ class PostsController {
     })
     .then(result => {
       console.log(result)
-      res.send(result)
+      console.log('done-=-=-=-==-=-')
+      res.status(200).send(result)
     })
     .catch(err => {
       console.log(err);
