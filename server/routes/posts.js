@@ -9,10 +9,13 @@ const gcs             = require('../middleware/gcs')
 router.post('/',authentication, multer.single('file'), gcs, PostsController.createPost);
 
 // Get Timeline
-router.get('/', authentication, PostsController.getTimeline);
+router.get('/timeline', authentication, PostsController.getTimeline);
 
 // Get User's Post
 router.get('/user/:id', authentication, PostsController.getUserPosts);
+
+//Delete Post
+router.delete('/:id', authentication, PostsController.deletePost)
 
 // Edit Post
 router.put('/:id', authentication, PostsController.editPost);

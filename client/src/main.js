@@ -5,10 +5,11 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import axios from 'axios'
+import store from './vuex/index'
 import 'vuetify/dist/vuetify.css'
 
 Vue.config.productionTip = false
-let baseURL = 'http://35.185.185.63:3000'
+let baseURL = 'http://localhost:3002'
 Vue.use(Vuetify)
 Vue.use(router)
 Vue.prototype.$axios = axios.create({
