@@ -8,7 +8,7 @@
       </v-card-media>
        <v-card-title primary-title>
             <span v-if="!isEditCaption"><b class="pr-2">{{post.owner.userName}}</b>"{{post.caption}}"</span>
-            <v-text-field v-if="isEditCaption" label="new caption" v-model="newCaption" @keyup.enter="submitCaption"></v-text-field>
+            <v-text-field v-if="isEditCaption" label="new caption" v-model="newCaption" @keyup.enter="submitCaption" :value="post.caption"></v-text-field>
         </v-card-title>
       <v-card-actions class="pl-4 pr-4">
         
@@ -100,9 +100,9 @@ import jwt from 'jsonwebtoken'
         .then(response =>{
           console.log(response);
           this.$store.commit('getTimeline')
-          this.newCaption = null;
+          this.newCaption = this.post.caption;
           this.isEditCaption = !this.isEditCaption
-          alert('Post Deleted!')
+          alert('Caption Updated!')
         })
         .catch(err => console.log(`Fail: ${err}`))
       },
@@ -119,7 +119,7 @@ import jwt from 'jsonwebtoken'
           console.log(response);
           this.$store.commit('getTimeline')
           this.$store.commit('getAllPosts');
-          alert('Caption Updated!')
+          alert('Post Deleted!')
         })
         .catch(err => console.log(`Fail: ${err}`))
       },
@@ -155,6 +155,9 @@ import jwt from 'jsonwebtoken'
           return 'grey'
         }
       }
+    },
+    created () {
+      this.newCaption = this.post.caption
     }
   }
 </script>
