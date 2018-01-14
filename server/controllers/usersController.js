@@ -92,6 +92,8 @@ class UserController {
 
   static findUserById(req, res) {
     User.findOne({_id: req.params.id})
+    .populate('following')
+    .populate('followers')
     .then(dataUser => {
       if (dataUser === null){
         res.status(204).json({

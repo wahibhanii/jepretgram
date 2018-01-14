@@ -53,7 +53,12 @@ import {mapGetters} from 'vuex'
     computed: {
       isFollowing (){
         console.log(this.user.following )
-        return this.$store.state.myProfile.following.indexOf(this.user._id) != -1
+        let isIdMatch = this.$store.state.myProfile.following.find(user => {
+          return user._id === this.user._id
+        })
+        console.log(isIdMatch, 'xxxxxxxxxxxxxxxx')
+        return isIdMatch !== undefined
+
       },
       isMe () {
         return this.user._id == this.$store.state.myProfile._id

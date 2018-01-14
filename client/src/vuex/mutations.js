@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import axios from 'axios'
-const baseURL = 'http://35.185.185.63:3002'
+const baseURL = 'http://localhost:3002' // 'http://35.192.12.158'
 const mutations = {
   // setUserData () {
   //   console.log('set user data . . . .')

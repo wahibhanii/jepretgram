@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-layout  class="scrollable"row justify-center v-for="post in allPosts" :key="post._id" mb-1>
+    <v-layout  class="scrollable" row justify-center v-for="post in allPosts" :key="post._id" mb-1>
         <post :post="post"></post>
       </v-layout>
   </v-app>
