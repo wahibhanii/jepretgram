@@ -74,8 +74,7 @@ ____________________
 | `/posts/:id/uncomment`  | PUT    | remove comment from post |
 
 ### Endpoint Usage
-- GET : `/posts/` 
-  - 
+- GET : `/posts/`
 - GET : `/posts/timeline`
   - req.headers.token: contain token from login
 - POST : `/posts/` 
