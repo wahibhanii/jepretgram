@@ -54,7 +54,7 @@ export default {
         email: null,
         emailRules: [
           (v) => !!v || 'E-mail is required',
-          // (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+          (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
         ],
         password: null,
         passwordRules: [
@@ -69,37 +69,40 @@ export default {
     },
     methods: {
       login () {
-        console.log('Loggin in', this.email, this.password)
-        this.$axios({
-          method: 'post',
-          url: `/users/login`,
-          data: {
-            email: this.email,
-            password: this.password
-          }
-        })
-        .then(loginResponse => {
-          if (loginResponse.status === 200) {
-            this.email = null
-            this.password = null
-            this.failMessage = null
-            localStorage.setItem('token', loginResponse.data.token)
-            this.$store.state.isLoggedIn = true
-            this.$router.push('/')
-          } else if (loginResponse.status === 204) {
-            this.failMessage = 'User not Found'
-            this.email = null
-            this.password = null
-          } else if (loginResponse.status === 202) {
-            this.failMessage = 'Wrong Password'
-            this.password = null
-          }
-        })
-        .catch(err => {
-          console.log(err)
-        })
+        if (this.valid) {
+          console.log('Loggin in', this.email, this.password)
+          this.$axios({
+            method: 'post',
+            url: `/users/login`,
+            data: {
+              email: this.email,
+              password: this.password
+            }
+          })
+          .then(loginResponse => {
+            if (loginResponse.status === 200) {
+              this.email = null
+              this.password = null
+              this.failMessage = null
+              localStorage.setItem('token', loginResponse.data.token)
+              this.$store.state.isLoggedIn = true
+              this.$router.push('/')
+            } else if (loginResponse.status === 204) {
+              this.failMessage = 'User not Found'
+              this.email = null
+              this.password = null
+            } else if (loginResponse.status === 202) {
+              this.failMessage = 'Wrong Password'
+              this.password = null
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        } else {
+        this.failMessage = 'Validation error'
+        }
       },
-
       gotoSignup(){
         this.$router.push('/signup')
       }
