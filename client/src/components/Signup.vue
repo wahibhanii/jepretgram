@@ -81,12 +81,10 @@ export default {
         password: null,
         passwordRules: [
           (v) => !!v || 'Password is required',
-          // (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
         ],
         passwordConf: null,
         passwordRules: [
           (v) => !!v || 'Password Confirmation is required',
-          // (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
         ],
         failMessage: null,
       }

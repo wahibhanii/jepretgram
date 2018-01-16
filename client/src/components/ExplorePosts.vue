@@ -21,10 +21,6 @@ import {mapGetters} from 'vuex'
       mapGetters([
         'allPosts'
       ])
-    ,
-    created () {
-      // this.$store.commit('getTimeline')
-    }
   }
 </script>
 

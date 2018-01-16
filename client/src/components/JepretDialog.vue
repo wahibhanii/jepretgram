@@ -55,7 +55,6 @@ import Comment from './Comment'
             }
           })
           .then(response =>{
-            console.log(response);
             this.$store.commit('getTimeline')
             this.uploadCaption = null;
             this.updated = null;

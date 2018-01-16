@@ -64,7 +64,6 @@ import jwt from 'jsonwebtoken'
     },
     methods : {
       addComment () {
-        console.log('adding comment', this.newComment)
         this.$axios({
           method: 'put',
           url: `/posts/${this.post._id}/comment`,
@@ -76,7 +75,6 @@ import jwt from 'jsonwebtoken'
           }
         })
         .then(response =>{
-          console.log(response);
           this.$store.commit('getTimeline');
           this.$store.commit('getAllPosts');
           this.newComment = null;
@@ -99,7 +97,6 @@ import jwt from 'jsonwebtoken'
           }
         })
         .then(response =>{
-          console.log(response);
           this.$store.commit('getTimeline')
           this.newCaption = this.post.caption;
           this.isEditCaption = !this.isEditCaption
@@ -108,7 +105,6 @@ import jwt from 'jsonwebtoken'
         .catch(err => console.log(`Fail: ${err}`))
       },
       deletePost () {
-        console.log('deleting Post',this.post._id )
         this.$axios({
           method: 'delete',
           url: `/posts/${this.post._id}`,
@@ -117,7 +113,6 @@ import jwt from 'jsonwebtoken'
           }
         })
         .then(response =>{
-          console.log(response);
           this.$store.commit('getTimeline')
           this.$store.commit('getAllPosts');
           alert('Post Deleted!')
@@ -125,7 +120,6 @@ import jwt from 'jsonwebtoken'
         .catch(err => console.log(`Fail: ${err}`))
       },
       likeUnline () {
-        console.log('like unlike')
         this.$axios({
           method: 'put',
           url: `/posts/${this.post._id}/likeunlike`,
@@ -134,7 +128,6 @@ import jwt from 'jsonwebtoken'
           }
         })
         .then(response =>{
-          console.log(response);
           this.$store.commit('getTimeline')
           this.$store.commit('getAllPosts');
         })
@@ -148,8 +141,6 @@ import jwt from 'jsonwebtoken'
       },
       isLiked () {
         let userId = jwt.decode(localStorage.token)._id
-        console.log(this.post.likers._id, userId )
-        // console.log(this.post.likers.map(x => x._id).indexOf(userId))
         if (this.post.likers.map(x => x._id).indexOf(userId) !== -1){
           return 'pink'
         } else {

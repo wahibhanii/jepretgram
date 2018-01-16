@@ -19,7 +19,6 @@ const mutations = {
   //   })
   // }
   setLoginStatus(){
-    console.log('login status')
     if (localStorage.token !== undefined){
       this.state.isLoggedIn = true
     } else {
@@ -35,7 +34,6 @@ const mutations = {
   },
 
   getTimeline () {
-    console.log('getting timeline')
     axios({
       method: 'get',
       url: `${baseURL}/posts/timeline`,
@@ -45,12 +43,10 @@ const mutations = {
       this.state.timelinePosts = response.data
     })
     .catch(err => {
-      console.log(err)
     })
   },
 
   getAllPosts () {
-    console.log('getting all posts')
     axios({
       method: 'get',
       url: `${baseURL}/posts`,
@@ -65,7 +61,6 @@ const mutations = {
   },
 
   getAllUsers () {
-    console.log('getting all Users')
     axios({
       method: 'get',
       url: `${baseURL}/users`,
@@ -80,7 +75,6 @@ const mutations = {
   },
 
   getMyProfile () {
-    console.log('getting my profile')
     let userId = jwt.decode(localStorage.token)._id
     axios({
       method: 'get',

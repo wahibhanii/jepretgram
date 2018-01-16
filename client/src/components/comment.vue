@@ -23,8 +23,6 @@ import jwt from 'jsonwebtoken'
     },
     methods: {
       deleteComment () {
-        console.log('deleting comment', this.postId, this.data._id)
-        
         this.$axios({
           method: 'put',
           url: `/posts/${this.postId}/uncomment`,
@@ -36,17 +34,14 @@ import jwt from 'jsonwebtoken'
           }
         })
         .then(response =>{
-          console.log(response);
           this.$store.commit('getTimeline');
           this.newComment = null;
         })
-        // .catch(err => console.log(`Fail: ${err}`))
       }
     },
     computed :{
       isUserAuth () {
         let userId = jwt.decode(localStorage.token)._id
-        console.log(this.data.owner._id)
         return (userId === this.data.owner._id)
       }
     }

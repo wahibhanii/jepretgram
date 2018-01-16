@@ -1,8 +1,5 @@
 const state = {
   isLoggedIn: false,
-  // isFBLoggedIn: false,
-  // userData: {},
-  // shownLists: []
   activeNav : 'timeline',
   timelinePosts: null,
   allPosts: null,

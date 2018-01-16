@@ -53,8 +53,3 @@ import jwt from 'jsonwebtoken'
     }
   }
 </script>
-<style>
-.title{
-
-}
-</style>

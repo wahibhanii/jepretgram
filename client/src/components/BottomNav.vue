@@ -43,14 +43,12 @@
         this.$router.push('/myProfile')
       },
       jepret () {
-        console.log('jepret...')
         this.$store.state.jepretDialog = true
       }
      
     },
     updated () {
       this.$store.state.activeNav = this.e1
-      console.log(this.$store.state.activeNav )
     }
   }
 </script>
