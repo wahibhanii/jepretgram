@@ -20,7 +20,7 @@ ____________________
   - __caption__: shows caption of the photo, user's who own the post may edit this
   - __Like/unlike__: 
     - you can like and unlike post. 
-    - Post you've liked will show pink thumb up icon, pink if you've unliked it. 
+    - Post you've liked will show pink thumb up icon, grey if you've unliked it. 
     - You can see who's liking a post by hovering it to the __likes count__ 
   - __comment__: yaou can see comment by clicking __more__ on the bottom right of the post/photo card. 
     - You can add comment byt typing onto the comment field and press enter.
