@@ -9,7 +9,7 @@ ____________________
 ### Page
   - regular signup using email
   - regular login 
-  - timeline: only shows post from yourserlf and people you follow
+  - timeline: only shows post from yourself and people you follow
   - explore:
     - posts: see all posts 
     - users: see all users
@@ -46,13 +46,13 @@ ____________________
 ### Endpoint Usage
 - POST : `/users/login`
   - req.body.email: should contain user's email
-  - req.bpdy.password: should contain user's password
+  - req.body.password: should contain user's password
 - GET : `/users/`
 - GET : `/users/:id` 
 - POST : `/users/`
   - req.body.email: should contain user's email
   - req.body.userName: should contain user's username
-  - req.bpdy.password: should contain user's password
+  - req.body.password: should contain user's password
 - DELETE : `/users/:id`  
 - PUT : `/users/:id/`
   - req.body.update: should contain updated filed and it's value (write in stringified JSON)
@@ -105,7 +105,7 @@ ____________________
 | Route                           | HTTP   | Description                       | 
 | ---------------------------     |:------ | --------------------------------- |
 | `/usercomments/:id/editcomment` | PUT    | Edit a comment *                  |
-*this feature currently not being used
+* this feature currently not being used
 
 ### Endpoint Usage
 - PUT : `/usercomments/:id/editcomment` 
